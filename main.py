@@ -3,20 +3,14 @@ import requests
 from bs4 import BeautifulSoup
 
 def weather(city):
-    # Empty List to input into CSV File
-    list = []
-
     # For the Query
     city = city.replace(" ", "+")
 
     link = "https://www.google.com/search?q=weather+" + city
     res = requests.get(link)
+    
     # Website Title
     soup = BeautifulSoup(res.content, "html.parser")
-
-    # #specify to soup.find() method is the HTML tag name and the matched attributes
-    # temperature = soup.select('#wob_tm')[0].getText().strip()
-
     element = soup.find('div', class_='BNeawe iBp4i AP7Wnd')
 
     # If the element is found, .text is used to extract the text within the span element.
